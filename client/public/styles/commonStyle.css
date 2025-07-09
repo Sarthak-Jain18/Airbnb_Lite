@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+.cs-btn {
+    color: white;
+    background-color: #ff4d4d;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.cs-btn:hover {
+    opacity: 0.7;
+}
+
+.cs-bd {
+    border: 0.1rem solid #b4b4b4b2;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+/* NEW + EDIT (CATEGORY : PILL STYLE) */
+
+/* CATEGORY PILL STYLE */
+.category-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    gap: 0.5rem;
+    user-select: none;
+}
+
+/* ON HOVER */
+.category-pill:hover {
+    background-color: #e0e0e0;
+}
+
+/* ICON STYLE */
+.category-pill i {
+    font-size: 1rem;
+}
+
+/* WHEN SELECTED: BLACK BACKGROUND */
+.category-pill:has(input:checked) {
+    background-color: black;
+    color: white;
+}
+
+/* ENSURE ICON AND TEXT BOTH TURN WHITE */
+.category-pill:has(input:checked) i {
+    color: white;
+}
+
+/* REMOVE DEFAULT CHECKBOX VISIBILITY */
+.category-pill input[type="checkbox"] {
+    display: none;
+}
+
+/* EDIT ROUTE : UPLOADED IMAGE */
+.img-preview {
+    max-width: 20rem;
+    max-height: 12rem;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.2);
+}

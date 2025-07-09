@@ -1,0 +1,329 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="show-container" id="show_container">
+
+        <!-- TITLE + COUNTRY + EDIT + DELETE -->
+        <div class="show-top-div1 w-100 d-flex flex-wrap mb-4">
+
+            <div class="show-name ms-0">
+                <div class="show-title m-2 text-break">
+                    <h2>
+                        <%=showListing.title%>
+                    </h2>
+                </div>
+                <div class="show-country m-2"><i class="fa-solid fa-location-dot"></i>
+                    <%=showListing.country%>
+                </div>
+            </div>
+
+            <% if(currUser && currUser._id.equals(showListing.owner._id)) { %>
+                <div class="edit-delete-div d-flex flex-wrap ms-auto mt-4">
+                    <div class="edit-div m-2">
+                        <form method="get" action="/listings/edit/<%=showListing._id%>">
+                            <button class="cs-btn"><i class="fa-solid fa-pen-to-square"></i>
+                                Edit</button>
+                        </form>
+                    </div>
+                    <div class="delete-div m-2">
+                        <form method="post" id="delete_form" action="/listings/<%=showListing._id%>?_method=DELETE">
+                            <button type="button" id="delete_btn" class="cs-btn bg-dark"><i
+                                    class="fa-solid fa-trash"></i>
+                                Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <% } %>
+
+        </div>
+
+        <!-- IMAGE + OWNER + ABOUT + PRICE -->
+        <div class="show-top-div2 w-100 custom-height1 d-flex flex-wrap mb-4">
+
+            <div class="show-img w-50 h-100 p-1">
+                <img class="img-fluid img-custom-rad w-100 h-100" src="<%=showListing.image.url%>" alt="listing-image">
+            </div>
+
+            <div class="owner-about-price-div w-50 h-100 p-3">
+
+                <div class="listing-owner cs-bd mt-2 d-flex">
+                    <div class="listing-user m-2 me-3"><i class="fa-solid fa-user fs-4"></i></div>
+                    <div class="head-listing-owner">
+                        <h3>Hosted by <%=showListing.owner.username%>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="listing-desc cs-bd mt-2 text-break overflow-auto" style="max-height: 15rem;">
+                    <h4>About this place</h4>
+                    <%=showListing.description%>
+                </div>
+
+                <div class="listing-price cs-bd mt-2">
+                    <h4>&#8377 <%=showListing.price.toLocaleString("en-IN")%>/night</h4>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4 w-100">
+
+        <!-- CATEGORY -->
+        <div class="show-mid-div3 w-100">
+            <div class="show-category">
+                <h3>Explore by category</h3><br>
+                <div class="show-category-inner">
+
+                    <% for (let category of showListing.category) { %>
+
+                        <% if (category==="Rooms" ) { %>
+                            <div class="category-pill"><i class="fa-solid fa-bed"></i>
+                                <%= category %>
+                            </div>
+
+                            <% } else if (category==="Farms" ) { %>
+                                <div class="category-pill"><i class="fa-solid fa-tractor"></i>
+                                    <%= category %>
+                                </div>
+
+                                <% } else if (category==="Iconic cities" ) { %>
+                                    <div class="category-pill"><i class="fa-solid fa-mountain-city"></i>
+                                        <%= category %>
+                                    </div>
+
+                                    <% } else if (category==="Beach" ) { %>
+                                        <div class="category-pill"><i class="fa-solid fa-umbrella-beach"></i>
+                                            <%= category %>
+                                        </div>
+
+                                        <% } else if (category==="Greenry" ) { %>
+                                            <div class="category-pill"><i class="fa-solid fa-tree"></i>
+                                                <%= category %>
+                                            </div>
+
+                                            <% } else if (category==="Amazing pools" ) { %>
+                                                <div class="category-pill"><i class="fa-solid fa-person-swimming"></i>
+                                                    <%= category %>
+                                                </div>
+
+                                                <% } else if (category==="Snow city" ) { %>
+                                                    <div class="category-pill"><i class="fa-solid fa-igloo"></i>
+                                                        <%= category %>
+                                                    </div>
+
+                                                    <% } else if (category==="Mountain" ) { %>
+                                                        <div class="category-pill"><i
+                                                                class="fa-solid fa-mountain-sun"></i>
+                                                            <%= category %>
+                                                        </div>
+
+                                                        <% } else if (category==="Camping" ) { %>
+                                                            <div class="category-pill"><i class="fa-solid fa-tent"></i>
+                                                                <%= category %>
+                                                            </div>
+
+                                                            <% } else if (category==="Sailing" ) { %>
+                                                                <div class="category-pill"><i
+                                                                        class="fa-solid fa-sailboat"></i>
+                                                                    <%= category %>
+                                                                </div>
+
+                                                                <% } else if (category==="Hiking" ) { %>
+                                                                    <div class="category-pill"><i
+                                                                            class="fa-solid fa-person-hiking"></i>
+                                                                        <%= category %>
+                                                                    </div>
+
+                                                                    <% } %>
+
+                                                                        <% } %>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4 w-100">
+
+        <!-- MAP + LOCATION + COUNTRY -->
+        <div class="show-mid-div4 w-100 mt-2 mb-2">
+
+            <div class="show-where-U-be w-100">
+                <h3>Where you'll be</h3>
+            </div>
+            <br>
+
+            <div class="show-address w-100">
+                <h4>Location: <%=showListing.location%>, <%=showListing.country%>
+                </h4>
+            </div>
+            <br>
+
+            <div class="show-map cs-mp-height" id="map" data-lat="<%= lat || 20 %>" data-lon="<%= lon || 0 %>"
+                data-zoom="<%= lat && lon ? 13 : 2 %>" data-title="<%= showListing.title %>"
+                data-address="<%= showListing.location %>, <%= showListing.country %>">
+            </div>
+
+        </div>
+
+        <hr class="my-4 w-100">
+
+        <!-- ADD REVIEW -->
+        <div class="show-bottom-div5 w-100">
+            <div class="add-review w-100">
+
+                <div class="head-add-review w-100">
+                    <h3>Add a review</h3>
+                </div>
+                <br>
+
+                <div class="review-form w-100">
+                    <form method="post" action="/listings/<%=showListing._id%>/reviews" novalidate
+                        class="needs-validation">
+
+                        <div>
+                            <label for="comment" class="form-label"><b>Comment</b></label>
+                            <textarea id="comment" class="form-control" placeholder="Enter comment"
+                                name="review[comment]" required></textarea>
+                            <div class="invalid-feedback">Enter a valid comment</div>
+                        </div>
+                        <br>
+
+                        <div>
+                            <label for="rating" class="form-label"><b>Rating</b></label>
+                            <fieldset class="starability-basic">
+                                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1"
+                                    checked aria-label="No rating." />
+                                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+                        </div>
+
+                        <% if (currUser) { %>
+                            <div class="submit-review">
+                                <button class="cs-btn">Submit</button>
+                            </div>
+                            <% } else { %>
+                                <div class="login-submit-review">
+                                    <button class="cs-btn" disabled>Submit</button>
+                                    <p class="opacity-75">To submit review "Login" first</p>
+                                </div>
+                                <% } %>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <hr class="my-4 w-100 mt-4 mb-4">
+
+        <!-- SHOW REVIEW -->
+        <div class="show-bottom-div6 w-100">
+            <div class="all-reveiws w-100">
+
+                <div class="head-all-reviews w-100">
+                    <h3>All reviews</h3>
+                </div>
+                <br>
+
+                <% if(showListing.reviews.length>0) { %>
+
+                    <div class="review-container w-100">
+                        <div class="row g-4 w-100">
+
+                            <% for (let review of showListing.reviews) { %>
+                                <div class="col-12 col-md-6">
+                                    <div class="review-card p-3 border rounded shadow-sm">
+
+                                        <div class="review-author d-flex align-items-start mb-2">
+                                            <div class="userLogo me-3 mt-3"><i class="fa-solid fa-user fs-4"></i></div>
+                                            <div class="reviewInfo">
+                                                <div class="userName">
+                                                    <%= review.author.username %>
+                                                </div>
+                                                <div class="reviewDate text-muted small">
+                                                    <%= review.createdAt.toLocaleDateString('en-GB', { day: '2-digit' ,
+                                                        month: 'short' , year: 'numeric' }) %>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="reviewRating mb-2">
+                                            <p class="starability-result" data-rating="<%= review.rating %>"></p>
+                                        </div>
+
+                                        <div class="reviewComment mb-2">
+                                            <%= review.comment %>
+                                        </div>
+
+                                        <% if (currUser && currUser._id.equals(review.author._id)) { %>
+                                            <div class="review-del-opt text-end">
+                                                <form method="post"
+                                                    action="/listings/<%= showListing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                                    <button class="cs-btn bg-dark">Delete</button>
+                                                </form>
+                                            </div>
+                                            <% } %>
+
+                                    </div>
+                                </div>
+                                <% } %>
+
+                        </div>
+                    </div>
+
+                    <% } else { %>
+                        <div class="no-reviews w-100 ms-auto me-auto">No reviews available. Add some.</div>
+                        <% } %>
+
+            </div>
+        </div>
+
+        <!-- END OF SHOW.EJS -->
+        <br>
+
+    </div>
+
+    <div id="alertContainer">
+        <div id="customAlert">
+            <div class="alertIcon"><img src="/assets/alert_icon.png" alt="delete_alert"></div>
+            <div class="confirm">
+                <h3>Are you sure?</h3>
+                <h5>You won't be able to revert this!</h5>
+            </div>
+            <div id="btns">
+                <button id="confirmBtnNo" class="cs-btn border border-1 text-black bg-white m-2">Cancel</button>
+                <button id="confirmBtnYes" class="cs-btn m-2">Yes, delete it!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const mapDiv = document.getElementById("map");
+
+        const lat = parseFloat(mapDiv.dataset.lat);
+        const lon = parseFloat(mapDiv.dataset.lon);
+        const zoom = parseInt(mapDiv.dataset.zoom);
+
+        const map = L.map('map').setView([lat, lon], zoom);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        if (zoom !== 2) {
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup(`<b>${mapDiv.dataset.title}</b><br>${mapDiv.dataset.address}`)
+                .openPopup();
+        }
+    </script>
+
+

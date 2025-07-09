@@ -1,0 +1,44 @@
+/* NAVBAR */
+
+.navbar {
+  height: 5rem;
+  background-color: white;
+}
+
+.nav-link {
+  color: #222222 !important;
+}
+
+.navbar-collapse {
+  background-color: white;
+}
+
+.collapse a:hover {
+  opacity: 0.8;
+}
+
+/* search bar */
+
+.search_bar input {
+  margin-right: 0 !important;
+  border-radius: 1rem 0 0 1rem;
+}
+
+.search_bar button {
+  background-color: #ff4d4d;
+  color: white;
+  border-radius: 0 1rem 1rem 0;
+}
+
+.search_bar button:hover {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.search_bar i {
+  margin-right: 0.5rem;
+  display: inline;
+}
+
+
+

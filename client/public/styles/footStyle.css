@@ -1,0 +1,14 @@
+/* FOOTER */
+
+.social a:hover {
+    opacity: 0.7;
+}
+
+.footer-link {
+    color: black;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}

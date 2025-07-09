@@ -1,0 +1,180 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="sub-nav">
+        <div id="filters">
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Trending">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-fire"></i></div>
+                        <div>
+                            <p>Trending</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Rooms">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-bed"></i></div>
+                        <div>
+                            <p>Rooms</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Farms">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-tractor"></i></div>
+                        <div>
+                            <p>Farms</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Iconic cities">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-mountain-city"></i></div>
+                        <div>
+                            <p>Iconic cities</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Beach">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                        <div>
+                            <p>Beach</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Greenry">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-tree"></i></div>
+                        <div>
+                            <p>Greenry</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Amazing pools">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-person-swimming"></i></div>
+                        <div>
+                            <p>Amazing pools</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Snow city">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-igloo"></i></div>
+                        <div>
+                            <p>Snow city</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Mountain">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-mountain-sun"></i></div>
+                        <div>
+                            <p>Mountain</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Camping">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-tent"></i></div>
+                        <div>
+                            <p>Camping</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Sailing">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-sailboat"></i></div>
+                        <div>
+                            <p>Sailing</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/Hiking">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-person-hiking"></i></div>
+                        <div>
+                            <p>Hiking</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        <div id="reset">
+            <div id="filter">
+                <a class="text-dark text-decoration-none" href="/listings/filter/reset">
+                    <div id="filter-inner">
+                        <div><i class="fa-solid fa-rotate-right"></i></div>
+                        <div>
+                            <p>Reset</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="index-container">
+        <% if(listings.length>0) { %>
+            <% for(listing of listings) { %>
+                <div class="listing-card">
+                    <a class="text-decoration-none text-dark" href="/listings/<%=listing._id%>">
+                        <div class="listing-img">
+                            <img src="<%=listing.image.url%>" alt="listing-image">
+                        </div>
+                        <div class="listing-content">
+                            <h5><b>
+                                    <%=listing.title%>
+                                </b></h5>
+                            <p>&#8377 <%=listing.price.toLocaleString("en-IN")%>/night</p>
+                        </div>
+                    </a>
+                </div>
+                <% } %>
+                    <% } else { %>
+                        <div class="ms-auto me-auto">
+                            <p>No data found</p>
+                        </div>
+                        <% } %>
+    </div>
+
+
+
+    
