@@ -15,6 +15,7 @@ main()
     .catch(err => console.log(err));
 async function main() {
     await mongoose.connect(db_url);
+    // await mongoose.connect(MONGO_URL);
 }
 
 //METHOD-OVERRIDE
@@ -123,3 +124,6 @@ app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Oops...something went wrong!" } = err;
     res.status(statusCode).render("listings/error.ejs", { message });
 });
+
+
+

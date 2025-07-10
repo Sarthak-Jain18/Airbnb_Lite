@@ -37,30 +37,32 @@
         </div>
 
         <!-- IMAGE + OWNER + ABOUT + PRICE -->
-        <div class="show-top-div2 w-100 custom-height1 d-flex flex-wrap mb-4">
+        <div class="show-top-div2 w-100 custom-height1 d-flex flex-md-row flex-column mb-4 gap-3">
 
-            <div class="show-img w-50 h-100 p-1">
-                <img class="img-fluid img-custom-rad w-100 h-100" src="<%=showListing.image.url%>" alt="listing-image">
+            <div class="show-img p-1">
+                <img class="img-fluid img-custom-rad show-fixed-img" src="<%= showListing.image.url %>"
+                    alt="listing-image">
             </div>
 
-            <div class="owner-about-price-div w-50 h-100 p-3">
+            <div class="owner-about-price-div p-3 flex-grow-1">
 
-                <div class="listing-owner cs-bd mt-2 d-flex">
+                <div class="listing-owner cs-bd mt-2 d-flex align-items-center">
                     <div class="listing-user m-2 me-3"><i class="fa-solid fa-user fs-4"></i></div>
                     <div class="head-listing-owner">
-                        <h3>Hosted by <%=showListing.owner.username%>
+                        <h3>Hosted by <%= showListing.owner.username %>
                         </h3>
                     </div>
                 </div>
 
                 <div class="listing-desc cs-bd mt-2 text-break overflow-auto" style="max-height: 15rem;">
                     <h4>About this place</h4>
-                    <%=showListing.description%>
+                    <%= showListing.description %>
                 </div>
 
                 <div class="listing-price cs-bd mt-2">
-                    <h4>&#8377 <%=showListing.price.toLocaleString("en-IN")%>/night</h4>
+                    <h4>&#8377; <%= showListing.price.toLocaleString("en-IN") %>/night</h4>
                 </div>
+
             </div>
 
         </div>
@@ -325,5 +327,4 @@
                 .openPopup();
         }
     </script>
-
-
+    

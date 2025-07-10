@@ -8,14 +8,11 @@
 
 #filters {
   display: flex;
-  overflow-x: auto;
-  /* Enables horizontal scroll */
+  overflow-x: auto; /* Enables horizontal scroll */
   gap: 1rem;
-  scroll-behavior: smooth;
-  /* padding: 1rem; */
+  scroll-behavior: smooth; /* padding: 1rem; */
   margin-left: 3rem;
-  white-space: nowrap;
-  /* Prevents line break */
+  white-space: nowrap; /* Prevents line break */
 }
 
 #filters::-webkit-scrollbar {
@@ -51,44 +48,78 @@
 
 .index-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
   padding: 1rem;
   box-sizing: border-box;
 }
 
 .listing-card {
-  flex: 1 1 18.75rem;
-  width: 16rem;
-  height: 22rem;
-  margin: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0.75rem;
   border-radius: 1rem;
-  opacity: 1;
+  background-color: #ffffff;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 18rem;
+  height: 22rem;
+  overflow: hidden;
+  margin: auto;
 }
 
 .listing-card:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-.listing-img img {
-  width: 15rem;
-  height: 15rem;
-  /* Fix height for uniform look */
-  object-fit: cover;
-  /* 🔥 Keeps image aspect, crops nicely */
+.listing-img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 👈 forces square container */
+  overflow: hidden;
   border-radius: 1rem;
 }
 
+.listing-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* LISTING CONTENT */
 .listing-content {
-  width: 15rem;
+  width: 100%;
   height: 7rem;
   margin-top: 0.5rem;
   overflow-y: auto;
+  text-align: left;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  scrollbar-width: thin;
+  padding: 0 0.25rem;
 }
 
+.listing-content h5 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
 
+.listing-content p {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 0;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .listing-content h5 {
+    font-size: 0.95rem;
+  }
+
+  .listing-content p {
+    font-size: 0.85rem;
+  }
+}
